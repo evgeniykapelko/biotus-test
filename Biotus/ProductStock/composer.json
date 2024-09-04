@@ -1,0 +1,18 @@
+{
+    "name": "biotus/module-product-stock",
+    "description": "A module to display product stock in real-time using ESI blocks and AJAX.",
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Biotus\\ProductStock\\": ""
+        }
+    }
+}

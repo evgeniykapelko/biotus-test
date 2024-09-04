@@ -1,0 +1,38 @@
+<?php
+/**
+ * @var Biotus\ProductStock\Block\Stock $block
+ * @var \Magento\Framework\Escaper $escaper
+*/
+?>
+
+<div x-data="initStock()" x-init="fetchStock()"
+id="product-stock">
+    <?= __('In Stock: '); ?>
+    <span id="stock-qty"></span>
+</div>
+
+<script>
+    function initStock() {
+        return {
+            fetchStock() {
+                fetch(`<?= $escaper->escapeUrl($block->getUpdateStockUrl()) ?>?id=${document.querySelector('input[name="product"]').value}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        //
+                    }
+                }).then(data => {
+                    if (data) {
+                        document.getElementById('stock-qty').textContent = data.qty;
+                    }
+                });
+            },
+        }
+    };
+</script>
